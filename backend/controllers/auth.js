@@ -11,10 +11,11 @@ exports.signup = async (req, res, next)=>{
     const mobile = req.body.mobile;
     const resetToken = '';
     const resetTokenExpire = '';
+    const accountType = 'buyer';
     const checkUser = await User.findOne({email});
     if(!checkUser){
         try{    
-            const newUser = await User.create({email, password, mobile, resetToken, resetTokenExpire});
+            const newUser = await User.create({email, password, mobile, resetToken, resetTokenExpire, accountType});
             res.send({
                 message: "user created successfully",
                 user: newUser,
@@ -33,8 +34,7 @@ exports.login = async (req, res, next)=>{
     const password = req.body.password;
     //checking that the user has entered both email and pwd
     if(!email || !password){
-        const message = "Please enter both email and password";
-        res.send(message);
+        res.send({success: false, message: "Please enter both email and password"});
     }
 
     try{
@@ -43,26 +43,24 @@ exports.login = async (req, res, next)=>{
         if(user){
             const isMatch = await user.verifyPwd(password);
             if(isMatch){
-                const message = "login successful";
                 req.session.userId = user._id;
-                res.send(user);
+                res.send({success: true, message: "Login Successful", type: user.accountType});
             } else {
-                const message = "Entered password is incorrect!"
-                res.send(message);
+                res.send({success: false, message:"Entered password is incorrect!"});
             }
         } else {
-            const message = "User not registered";
-            res.send(message);
+            res.send({success: false, message: "User not registered!"});
         }
     } catch(err){
         res.send(err);
     }
 }
 
-exports.logout = async (req, res, next)=>{
+exports.logout = (req, res, next)=>{
 
     req.session.userId =  null;
-    res.send("Successfully Logged Out!");
+    res.send({success: false, message: "Successfully Logged Out!"});
+
 }
 
 exports.forgotPwd = async (req, res, next)=>{
@@ -83,13 +81,13 @@ exports.forgotPwd = async (req, res, next)=>{
             });
             await checkUser.save();
             console.log(checkUser);
-            res.send("A link to reset your password has been sent to your registered email");
+            res.send({success: false, message: "A link to reset your password has been sent to your registered email"});
         } catch(err){
-            res.send("The following error occuered\n" + err);
+            res.send({success: false, message: "The following error occuered\n" + err});
         }
         
     } else {
-        res.send("This email is not registered!");
+        res.send({success: false, message: "This email is not registered!"});
     }
 }
 
@@ -104,9 +102,9 @@ exports.resetPwd = async (req, res, next)=>{
             findUser.resetToken = undefined;
             findUser.resetTokenExpire = undefined;
             await findUser.save();
-            res.send("Your password has been successfully reset, proceed to login!")
+            res.send({success: true, message: "Your password has been successfully reset, proceed to login!"} );
         } else {
-            res.send("Your password reset token has expired, kindy regenerate it!");
+            res.send({success: false, message: "Your password reset token has expired, kindy regenerate it!"} );
         }
     } catch(err){
         res.send(err);

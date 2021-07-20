@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const UserSchema = mongoose.Schema({
     email:{
@@ -36,6 +35,10 @@ const UserSchema = mongoose.Schema({
     },
     prevOrders: {
         type: Array,
+    },
+    accountType: {
+        type: String,
+        required: true
     },
    
 }, {

@@ -21,7 +21,8 @@ app.get('/', (req, res)=>{
 })
 
 app.use("/auth", require("./routes/auth"));
+app.use("/shop", require("./routes/products"));
 
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log(`Server started at http://localhost:${PORT}`);
 })
