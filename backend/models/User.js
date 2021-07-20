@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-require("crypto");
+const crypto = require("crypto");
 const UserSchema = mongoose.Schema({
     email:{
         type: String,
@@ -22,11 +22,22 @@ const UserSchema = mongoose.Schema({
         required: [true, "Mobile Number is required"],
         length: 10,
     },
-    cart: Array,
-    wishlist: Array,
-    prevOrders: Array,
-    resetToken: String,
-    resetTokenExpire: Date,
+    resetToken: {
+        type: String,
+    },
+    resetTokenExpire: {
+        type: Date,
+    },
+    cart: {
+        type: Array,
+    },
+    wishlist: {
+        type: Array,
+    },
+    prevOrders: {
+        type: Array,
+    },
+   
 }, {
     collection: "users",
 });
@@ -44,7 +55,7 @@ UserSchema.methods.verifyPwd = async function(password){
     return await bcryptjs.compare(password, this.password);
 }
 
-UserSchema.methods.genResetToken = async function(){
+UserSchema.methods.genResetToken = function(){
     const resetToken = crypto.randomBytes(20).toString("hex");
 
     this.resetToken = crypto.createHash("sha256").update(resetToken).digest("hex");

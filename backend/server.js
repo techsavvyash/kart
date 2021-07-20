@@ -15,6 +15,7 @@ app.use(session({
     resave: true,
 }))
 
+
 app.get('/', (req, res)=>{
     res.send("Server up and running!!");
 })
