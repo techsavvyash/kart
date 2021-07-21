@@ -5,17 +5,18 @@ const sendEmail = require("../utils/sendMail").sendEmail;
 
 
 exports.signup = async (req, res, next)=>{
-    
-    const email = req.body.email;
-    const password = req.body.password;
-    const mobile = req.body.mobile;
-    const resetToken = '';
-    const resetTokenExpire = '';
-    const accountType = 'buyer';
+    const {email, password, mobile, resetToken, resetTokenExpire, accountType, cart} = req.body;
+    // const email = req.body.email;
+    // const password = req.body.password;
+    // const mobile = req.body.mobile;
+    // const resetToken = '';
+    // const resetTokenExpire = '';
+    // const accountType = req.body.accountType;
+    // const cart = req.body.cart;
     const checkUser = await User.findOne({email});
     if(!checkUser){
         try{    
-            const newUser = await User.create({email, password, mobile, resetToken, resetTokenExpire, accountType});
+            const newUser = await User.create({email, password, mobile, resetToken, resetTokenExpire, accountType, cart});
             res.send({
                 message: "user created successfully",
                 user: newUser,
@@ -39,12 +40,39 @@ exports.login = async (req, res, next)=>{
 
     try{
         const user = await User.findOne({email}).select("+password");
-        console.log(user);
         if(user){
             const isMatch = await user.verifyPwd(password);
             if(isMatch){
                 req.session.userId = user._id;
-                res.send({success: true, message: "Login Successful", type: user.accountType});
+                res.send({success: true, message: "Login Successful", type: user.accountType, account: user});
+            } else {
+                res.send({success: false, message:"Entered password is incorrect!"});
+            }
+        } else {
+            res.send({success: false, message: "User not registered!"});
+        }
+    } catch(err){
+        res.send(err);
+    }
+}
+
+exports.sellerLogin = async(req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    //checking that the user has entered both email and pwd
+    if(!email || !password){
+        res.send({success: false, message: "Please enter both email and password"});
+    }
+    try{
+        const user = await User.findOne({email}).select("+password");
+        if(user){
+            if(user.accountType !== "seller"){
+                res.send({success: false, message: "Login with a seller account"});
+            }
+            const isMatch = await user.verifyPwd(password);
+            if(isMatch){
+                req.session.userId = user._id;
+                res.send({success: true, message: "Login Successful", type: user.accountType, account: user});
             } else {
                 res.send({success: false, message:"Entered password is incorrect!"});
             }
