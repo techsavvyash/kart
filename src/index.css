@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Oxygen;
+    src: url("./fonts/Oxygen-Regular.ttf");
+}
+*{
+    font-family: Oxygen;
+    margin: 0;
+    padding: 0;
+}
+
