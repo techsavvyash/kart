@@ -6,13 +6,6 @@ const sendEmail = require("../utils/sendMail").sendEmail;
 
 exports.signup = async (req, res, next)=>{
     const {email, password, mobile, resetToken, resetTokenExpire, accountType, cart} = req.body;
-    // const email = req.body.email;
-    // const password = req.body.password;
-    // const mobile = req.body.mobile;
-    // const resetToken = '';
-    // const resetTokenExpire = '';
-    // const accountType = req.body.accountType;
-    // const cart = req.body.cart;
     const checkUser = await User.findOne({email});
     if(!checkUser){
         try{    

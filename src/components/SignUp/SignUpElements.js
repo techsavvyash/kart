@@ -1,15 +1,18 @@
 import styled from "styled-components";
 
-export const LoginFormBg = styled.img`
-    width: 50%;
-    right: 0;
+export const SignUpFormBg = styled.img`
+    width: 30%;
+    left: 0;
+    top: 1;
     bottom: 0;
-    
     position: absolute;
     
+    @media screen and (max-width: 768px){
+        display: none;
+    }
 `;
 
-export const LoginBtn = styled.button`
+export const SignUpBtn = styled.button`
     background-color: #01bf71;
     border-radius: 50px;
     cursor: pointer;
@@ -18,20 +21,21 @@ export const LoginBtn = styled.button`
     width: 100px;
     font-size: 20px;
 `
+
 export const FormContainer = styled.div`
     background: black;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 30px;
-    height: 88vh;
+    height: 100vh;
     position: relative;
     z-index: 1;
-    overflow: hidden;
+   
 `
 
 export const Form = styled.form`
-    z-index: 3;
+    z-index: 11;
     width: 40vh;
     max-width: 1200px;
     position: absolute;
@@ -42,7 +46,7 @@ export const Form = styled.form`
     justify-content: center;
     background: white;
     border-radius: 15px;
-    box-shadow: 5px -5px grey;
+    box-shadow: 5px -5px grey; 
 `
 export const FormLabel = styled.label`
     color: black;
@@ -61,9 +65,19 @@ export const FormInput = styled.input`
     margin: 12px;
 
 `
+export const LoginBtn = styled.button`
+    background-color: #01bf71;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.2 all ease-in;
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+`
 
 export const FormHeading = styled.h3`
     color: #01bf71;
     text-align: center;
     
 `
+

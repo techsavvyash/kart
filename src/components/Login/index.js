@@ -1,20 +1,20 @@
 import React from 'react'
-import { LoginFormContainer, FormInput, FormLabel, LoginBtn, LoginForm, LoginFormBg, VideoBg } from './LoginElements'
+import { FormContainer, FormInput, FormLabel, Form, FormHeading } from './LoginElements'
+import { LoginFormBg, LoginBtn } from './LoginElements'
 import bg from '../../images/login.svg'
 const Login = () => {
     return (
-        <LoginFormContainer>
+        <FormContainer>
             <LoginFormBg src={bg} />
-                <LoginForm>
+                <Form>
+                    <FormHeading>Hey, There Welcome Back!<br />Login Below</FormHeading>
                     <FormLabel>Email</FormLabel>
                     <FormInput />
                     <FormLabel>Password</FormLabel>
                     <FormInput />
-                    <LoginBtn >Sing In</LoginBtn>
-                </LoginForm>
-            
-        </LoginFormContainer>
-
+                    <LoginBtn >Sign In</LoginBtn>
+                </Form>
+        </FormContainer>
     )
 }
 
