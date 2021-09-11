@@ -11,6 +11,7 @@ const SignUp = () => {
                         Hey There! Welcome to Kart<br />
                         Fill the form below to SignUp for your free kart account.
                     </FormHeading>
+                    
                     <FormLabel>Name: </FormLabel>
                     <FormInput type="text" />
                     <FormLabel>Email: </FormLabel>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const SignUpFormBg = styled.img`
     width: 30%;
     left: 0;
-    top: 1;
     bottom: 0;
     position: absolute;
     
@@ -18,7 +17,7 @@ export const SignUpBtn = styled.button`
     cursor: pointer;
     transition: 0.2 all ease-in;
     height: 50px;
-    width: 100px;
+    width: 170px;
     font-size: 20px;
 `
 
@@ -28,14 +27,14 @@ export const FormContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 30px;
-    height: 100vh;
-    position: relative;
-    z-index: 1;
-   
+    min-height: 88vh;
+    /* position: relative; */
+    /* z-index: 1; */
+   overflow: auto;
 `
 
 export const Form = styled.form`
-    z-index: 11;
+    /* z-index: 11; */
     width: 40vh;
     max-width: 1200px;
     position: absolute;
@@ -46,7 +45,7 @@ export const Form = styled.form`
     justify-content: center;
     background: white;
     border-radius: 15px;
-    box-shadow: 5px -5px grey; 
+    box-shadow: 5px 5px grey; 
 `
 export const FormLabel = styled.label`
     color: black;
