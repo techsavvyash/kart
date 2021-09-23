@@ -33,8 +33,10 @@ exports.login = async (req, res, next)=>{
 
     try{
         const user = await User.findOne({email}).select("+password");
+        console.log("Login request by: " + user);
         if(user){
             const isMatch = await user.verifyPwd(password);
+            console.log("isMatch: " + isMatch);
             if(isMatch){
                 req.session.userId = user._id;
                 res.send({success: true, message: "Login Successful", type: user.accountType, account: user});

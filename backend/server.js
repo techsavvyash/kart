@@ -1,11 +1,14 @@
 require("dotenv").config({path: "./config.env"});
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const session = require("express-session");
 const connectToDB = require("./config/db");
 
 const PORT = process.env.PORT
+
 connectToDB();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

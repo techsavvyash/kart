@@ -3,9 +3,9 @@ import Photo from '../../../images/undraw_web_shopping_dd4l.svg'
 import { CardContainer, CardProdDetails, CardProdPhoto, CardBtnWrapper, CardBuyBtn, CardInfoBtn } from './CardElements'
 import { Btn } from '../Info/InfoElements'
 
-const ProdCard = ({name, price, brand}) => {
+const ProdCard = ({id, name, price, brand}) => {
     return (
-        <CardContainer>
+        <CardContainer id = {id}>
             <CardProdPhoto src={Photo} />
             <CardProdDetails>
                 {name} <br />

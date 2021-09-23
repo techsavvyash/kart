@@ -9,7 +9,7 @@ const HomePg = () => {
     }]);
     useEffect(()=>{
         let ignore = false;
-        if(!false){
+        if(!false) {
             ignore = true;
             Axios({
                 method: "GET",
@@ -18,7 +18,7 @@ const HomePg = () => {
                 setProducts([...res.data.message]);
             })
         }
-    }, [])
+    }, []) ;
 
     return(
         <HomePgContainer>
@@ -29,20 +29,6 @@ const HomePg = () => {
                     )
                 })
             }
-             
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            {/* <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" /> 
-            <ProdCard name="Apple iPhone 12 Pro" price="147" brand="generic" />  */}
         </HomePgContainer>
     )
 }
