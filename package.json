@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^10.0.0",
+    "razorpay": "^2.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
@@ -18,7 +19,7 @@
     "styled-components": "^5.3.0",
     "web-vitals": "^1.1.2"
   },
-  "proxy" : "http://localhost:5454",
+  "proxy": "http://localhost:5454",
   "scripts": {
     "start": "react-scripts start && cd backend && node server.js",
     "build": "react-scripts build",

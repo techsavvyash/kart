@@ -19,7 +19,6 @@ export const FooterSocials = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 1.8rem;
-    
 `
 
 export const FooterSocialLink = styled(LinkR)`

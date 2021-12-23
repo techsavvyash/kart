@@ -1,9 +1,17 @@
-import React from 'react' ;
+import React, { useState } from 'react' ;
 import { FormContainer, FormInput, FormLabel, Form, 
         FormHeading, SignUpFormBg, SignUpBtn  } from '../SignUp/SignUpElements.js' ;
 import bg from '../../images/add.svg' ;
 
 const CheckOut = () => {
+    const [name, setName] = useState("");
+    const [mobile, setMobile] = useState(0);
+    const [addLine1, setAddLine1] = useState("");
+    const [addLine2, setAddLine2] = useState("");
+
+    const buyNow = (event) => {
+
+    }
 
     return (
         <FormContainer>

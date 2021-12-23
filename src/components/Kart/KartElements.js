@@ -13,7 +13,6 @@ export const KartContainer = styled.div`
     font-size: larger;
     overflow-y: auto;
     min-height: 85.5vh;
-     
 `
 
 export const KartHeading = styled.h2`
@@ -87,3 +86,8 @@ export const CheckOutBtn = styled.button`
     margin: 25px;    
 `
 
+export const KartBG = styled.img`
+    width: 50%auto;
+    position: absolute;
+    opacity: inherit;
+`
