@@ -4,22 +4,68 @@ const jwt = require("jsonwebtoken");
 const sendEmail = require("../utils/sendMail").sendEmail;
 
 
-exports.signup = async (req, res, next)=>{
-    const {email, password, mobile, resetToken, resetTokenExpire, accountType, cart} = req.body;
-    const checkUser = await User.findOne({email});
-    if(!checkUser){
-        try{    
-            const newUser = await User.create({email, password, mobile, resetToken, resetTokenExpire, accountType, cart});
-            res.send({
-                message: "user created successfully",
-                user: newUser,
-            });
-        } catch (err){
-            res.send(err);
-        }
+exports.checkLoginStatus = async(req, res, next) => {
+    console.log(req.session);
+    if(!req.session.userId) {
+        res.send({
+            loginStatus: false, 
+            reqSuccess: true, 
+            message: "User is not logged in!",
+            userDetails: {}
+        });
     } else {
-        res.send("Entered email is already registered, kindly login!");
-    }    
+        try {
+            const user = await User.findOne({_id: req.session.userId});
+            if(user) {
+                res.send({
+                    loginStatus: true, 
+                    message: "User is logged in!", 
+                    reqSuccess: true,
+                    userDetails: user
+                });
+            } else {
+                res.send({loginStatus: false, reqSuccess: true, message: "User is not logged in!", userDetails: {}});
+            }
+        } catch(err) {
+            res.send({reqSuccess: false, message: err, loginStatus: false, userDetails: {}});
+        }
+    }
+}
+
+exports.signup = async (req, res, next)=>{
+    const {name, email, password, mobile, resetToken, resetTokenExpire, accountType, cart} = req.body;
+    let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ;
+    if(!regex.test(email)){
+        res.send({
+            message: "Invalid email",
+            success: false
+        }).status(400);
+    } else if(mobile.toString().length != 10) {
+        res.send({
+            message: "Invalid mobile",
+            success: false
+        }).status(400);
+    }
+    try {
+        const checkUser = await User.findOne({email});
+        if(!checkUser){
+            try{    
+                const newUser = await User.create({name, email, password, mobile, resetToken, resetTokenExpire, accountType, cart});
+                res.send({
+                    message: "user created successfully",
+                    user: newUser,
+                    success: true
+                }).status(201);
+            } catch (err){
+                res.send(err);
+            }
+        } else {
+            res.send({message: "Entered email is already registered, kindly login!"}).status(409);
+        }
+    } catch(err) {
+        console.log(err);
+        res.send({message: err});
+    } 
 }
 
 exports.login = async (req, res, next)=>{
@@ -38,10 +84,12 @@ exports.login = async (req, res, next)=>{
             const isMatch = await user.verifyPwd(password);
             console.log("isMatch: " + isMatch);
             if(isMatch){
+                console.log(user._id);
                 req.session.userId = user._id;
+                console.log(req.session);
                 res.send({success: true, message: "Login Successful", type: user.accountType, account: user});
             } else {
-                res.send({success: false, message:"Entered password is incorrect!"});
+                res.send({success: false, message:"Entered password is incorrect!"}).status(400);
             }
         } else {
             res.send({success: false, message: "User not registered!"});
@@ -82,7 +130,7 @@ exports.sellerLogin = async(req, res, next) => {
 exports.logout = (req, res, next)=>{
 
     req.session.userId =  null;
-    res.send({success: false, message: "Successfully Logged Out!"});
+    res.send({success: true, message: "Successfully Logged Out!", loginStatus: false});
 
 }
 

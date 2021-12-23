@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const crypto = require("crypto");
 const UserSchema = mongoose.Schema({
-    email:{
+    name: {
+        type: String,
+        required: [true, "Name is required"]
+    },
+    email: {
         type: String,
         required: [true, "Email is required!"],
         match: [
@@ -33,9 +37,10 @@ const UserSchema = mongoose.Schema({
     wishlist: {
         type: Array,
     },
-    prevOrders: {
-        type: Array,
-    },
+    prevOrders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'orders'
+    }],
     accountType: {
         type: String,
         required: true

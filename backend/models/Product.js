@@ -24,17 +24,19 @@ const ProductSchema = mongoose.Schema({
     },
     brand: {
         type: String,
-        required: true
+        required: true,
     },
-    reviews: Array,
+    reviews:{
+        type: Array,
+    }
 
 },{
     collection: "products", 
 });
 
 ProductSchema.methods.updateQty = function(action, nums){
-    if(action==="increase") this.qty = this.qty + nums;
-    else if(action==="decrease") this.qty = this.qty - nums;
+    if(action === "increase") this.qty = this.qty + nums;
+    else if(action === "decrease") this.qty = this.qty - nums;
 }
 
 ProductSchema.methods.addReview = async function(data){
