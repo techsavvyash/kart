@@ -1,13 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
     font-family: Oxygen;
     src: url("./fonts/Oxygen-Regular.ttf");
 }
-*{
+
+* {
     font-family: Oxygen;
     margin: 0;
     padding: 0;
     height: auto;
     width: auto;
-    /* overflow: auto;overflow: auto; */
-}
+    overflow: auto;
+} 
 

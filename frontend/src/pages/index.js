@@ -12,7 +12,7 @@ import CheckOut from '../components/Checkout';
 import User from '../components/User';
 import PaymentSuccess from '../components/Success';
 import PaymentFailure from '../components/Failure';
-
+import FrontPage from '../components/FrontPage'
 
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,7 @@ const Home = () => {
             <Navbar toggle={toggle} />
             <Switch >
                 <Route exact path = "/"> 
-                    <HomePg />
+                    <HomePg /> 
                 </Route>
                 <Route path = "/login">
                     <Login />

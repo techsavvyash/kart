@@ -62,7 +62,7 @@ const HomePg = () => {
                     )
                 })
             }
-            <button onClick = {(event)=>{
+            {/*<button onClick = {(event)=>{
                 let options = {
                     "key_id": "rzp_test_wA6CMQo6R8vt6t", // Enter the Key ID generated from the Dashboard
                     //"key_secret": "d6Ookh3AtEjkUNcs5Pyn1Bsz",
@@ -100,7 +100,7 @@ const HomePg = () => {
                 }); 
                 rzp1.open() ;
                 event.preventDefault() ;
-            }}> CLick </button>
+            }}> CLick </button>*/}
         </HomePgContainer>
     )
 }
