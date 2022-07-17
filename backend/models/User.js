@@ -39,7 +39,7 @@ const UserSchema = mongoose.Schema({
     },
     prevOrders: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'orders'
+        ref: 'orders'       
     }],
     accountType: {
         type: String,
